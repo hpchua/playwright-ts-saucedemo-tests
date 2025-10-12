@@ -1,4 +1,4 @@
-# This workflow ONLY deploys a pre-existing report folder.
+# This workflow ONLY deploys a pre-generated report folder.
 # It does NOT run any tests.
 name: Deploy Pre-generated Playwright Report
 
@@ -13,6 +13,12 @@ on:
 jobs:
   # Job to deploy the report to GitHub Pages.
   deploy-report:
+
+    permissions:
+      contents: read      # Allows checkout of the repository.
+      pages: write        # Allows deployment to GitHub Pages.
+      id-token: write     # Allows for authentication with GitHub Pages.
+
     runs-on: ubuntu-latest
 
     steps:
