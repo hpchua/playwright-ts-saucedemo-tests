@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ES2022", //Outputs modern JavaScript (matches Node.js v18+ LTS support).
+        "module": "commonjs", // CommonJS modules (Node.js compatibility)
+        "moduleResolution": "Node", // Resolve modules Node.js-style
+        "sourceMap": true, // Generate source maps for debugging
+        "outDir": "./tests-out", // Output directory for compiled JS
+        "strict": true, // Enable strict mode
+        "rootDir": ".", // 👈 Covers all TS files in the project
+        "esModuleInterop": true, // Fix module interop
+        "skipLibCheck": true, // Faster builds
+        "forceConsistentCasingInFileNames": true, // Avoid filesystem issues
+        "lib": ["ES2022", "DOM"] // Browser environment types
+    },
+    "include": [
+        "tests/**/*.ts", // All test files
+        "src/**/*.ts", // Core source code
+        "*.ts" // Root-level TS files (e.g., playwright.config.ts)
+    ],
+    "exclude": [
+        "node_modules",
+        "dist", // Output directory
+        "tests-out", // Alternative output dir (if used)
+        ".next", // Next.js build (if applicable)
+        "coverage" // Test coverage reports
+    ]
+}
