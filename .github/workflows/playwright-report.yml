@@ -1,7 +1,7 @@
-# This is the name of the workflow that will appear in the "Actions" tab of your GitHub repository.
-name: Playwright Tests & Report Deployment
+# This workflow ONLY deploys a pre-generated report folder.
+# It does NOT run any tests.
+name: Deploy Pre-generated Playwright Report
 
-# This section defines when the workflow should run.
 on:
     # This allows you to run the workflow manually from the Actions tab.
     workflow_dispatch:
