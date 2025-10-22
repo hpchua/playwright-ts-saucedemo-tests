@@ -1,0 +1,3 @@
+actualSelectedText: Name (A to Z)
+isResetSuccessful: true
+defaultSortOption: Name (A to Z)

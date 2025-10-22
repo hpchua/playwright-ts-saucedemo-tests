@@ -1,0 +1,2 @@
+cartCount: 1
+Cart badge not found within timeout, cart is likely empty, will return 0

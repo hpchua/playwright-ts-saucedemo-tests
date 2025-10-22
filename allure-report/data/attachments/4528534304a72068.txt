@@ -1,0 +1,4 @@
+Cart badge not found within timeout, cart is likely empty, will return 0
+initialCartCount: 0
+cartCount: 1
+isButtonCorrect: true | isCountCorrect: true
