@@ -44,16 +44,26 @@ jobs:
               run: npx playwright test
               continue-on-error: true
 
-            # 6. Gathers the generated report files.
+              # 6. Install Allure Commandline Tool.
+            - name: Install Allure Commandline
+              run: npm install -g allure-commandline
+
+            # 7. Generate the Allure HTML report.
+            # This command takes the results from 'allure-results' and generates the report
+            # in the 'allure-report' directory, cleaning any previous report.
+            - name: Generate Allure Report
+              run: allure generate allure-results --clean -o allure-report
+
+            # 8. Gathers the generated report files.
             - name: Upload test report artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  # This is the folder where Playwright generates its HTML report.
+                  # This is the folder where Allure generates its HTML report.
                   path: allure-report/
                   # The report will be available for 30 days as an artifact.
                   retention-days: 30
 
-            # 7. Deploys the gathered report files to GitHub Pages.
+            # 9. Deploys the gathered report files to GitHub Pages.
             - name: Deploy to GitHub Pages
               id: deployment
-              uses: actions/deploy-pages@v4
+              uses: actions/deploy-pages@v4```
