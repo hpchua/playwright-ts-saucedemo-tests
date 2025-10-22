@@ -3,57 +3,57 @@ name: Playwright Tests & Report Deployment
 
 # This section defines when the workflow should run.
 on:
-  # This allows you to run the workflow manually from the Actions tab.
-  workflow_dispatch:
+    # This allows you to run the workflow manually from the Actions tab.
+    workflow_dispatch:
 
-  # This makes the workflow run automatically on every push to your "main" branch.
-  push:
-    branches: [ main ]
+    # This makes the workflow run automatically on every push to your "main" branch.
+    push:
+        branches: [main]
 
 # This section defines the jobs to be run.
 jobs:
-  # We have one job named "test-and-deploy".
-  test-and-deploy:
-    # It will run on the latest version of Ubuntu.
-    runs-on: ubuntu-latest
+    # We have one job named "test-and-deploy".
+    test-and-deploy:
+        # It will run on the latest version of Ubuntu.
+        runs-on: ubuntu-latest
 
-    # These are the individual steps the job will execute.
-    steps:
-      # 1. Checks out your repository code so the workflow can access it.
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        # These are the individual steps the job will execute.
+        steps:
+            # 1. Checks out your repository code so the workflow can access it.
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      # 2. Sets up the Node.js environment required for your project.
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18 # Use the same Node.js version you use locally.
+            # 2. Sets up the Node.js environment required for your project.
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18 # Use the same Node.js version you use locally.
 
-      # 3. Installs the project dependencies from your package.json file.
-      - name: Install dependencies
-        run: npm install
+            # 3. Installs the project dependencies from your package.json file.
+            - name: Install dependencies
+              run: npm install
 
-      # 4. Installs the necessary Playwright browsers.
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+            # 4. Installs the necessary Playwright browsers.
+            - name: Install Playwright Browsers
+              run: npx playwright install --with-deps
 
-      # 5. Runs the Playwright tests.
-      # The 'continue-on-error' line is important: it ensures that even if a test fails,
-      # the workflow will continue to the next step and publish the report.
-      - name: Run Playwright tests
-        run: npx playwright test
-        continue-on-error: true
+            # 5. Runs the Playwright tests.
+            # The 'continue-on-error' line is important: it ensures that even if a test fails,
+            # the workflow will continue to the next step and publish the report.
+            - name: Run Playwright tests
+              run: npx playwright test
+              continue-on-error: true
 
-      # 6. Gathers the generated report files.
-      - name: Upload test report artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # This is the folder where Playwright generates its HTML report.
-          path: playwright-report/
-          # The report will be available for 30 days as an artifact.
-          retention-days: 30
+            # 6. Gathers the generated report files.
+            - name: Upload test report artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  # This is the folder where Playwright generates its HTML report.
+                  path: allure-report/
+                  # The report will be available for 30 days as an artifact.
+                  retention-days: 30
 
-      # 7. Deploys the gathered report files to GitHub Pages.
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+            # 7. Deploys the gathered report files to GitHub Pages.
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
