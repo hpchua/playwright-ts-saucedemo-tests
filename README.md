@@ -38,6 +38,7 @@ This framework is designed to be:
 -   **Language:** [TypeScript](https://www.typescriptlang.org/)
 -   **Package Manager:** [NPM](https://www.npmjs.com/)
 -   **Code Formatter:** [Prettier](https://prettier.io/) for consistent code style.
+-   **Reporting:** [Allure Reporting](https://allurereport.org/)
 
 ---
 
@@ -46,7 +47,7 @@ This framework is designed to be:
 -   **End-to-End Test Scenarios:** Coverage for critical user flows from login to checkout.
 -   **Page Object Model (POM):** All page locators and actions are abstracted into reusable page classes, promoting clean and maintainable test scripts.
 -   **Cross-Browser Compatibility:** Tests are configured to run against multiple browsers (Chromium, Firefox, WebKit).
--   **Detailed HTML Reports:** Generates a comprehensive and interactive HTML report after each test run to easily visualize test results and debug failures.
+-   **Allure Reporting:** Integrated Allure to generate interactive and detailed test reports, visualizing execution steps, screenshots and failure logs for efficient debugging.
 
 #### Automated Test Scenarios (Completed):
 
