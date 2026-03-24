@@ -36,6 +36,11 @@ jobs:
 
             - name: Run Playwright tests
               run: npx playwright test
+              env:
+                  BASE_URL: ${{secrets.BASE_URL}}
+                  LOGIN_USERNAME: ${{secrets.LOGIN_USERNAME}}
+                  LOGIN_PASSWORD: ${{secrets.LOGIN_PASSWORD}}
+                  COMPANY_NAME: ${{secrets.COMPANY_NAME}}
               continue-on-error: true
 
             - name: Install Allure Commandline
