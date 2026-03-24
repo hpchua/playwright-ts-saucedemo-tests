@@ -3,72 +3,53 @@
 name: Deploy Pre-generated Playwright Report
 
 on:
-    # This allows you to run the workflow manually from the Actions tab.
     workflow_dispatch:
-
-    # This makes the workflow run automatically on every push to your "main" branch.
     push:
         branches: [main]
 
-# This section defines the jobs to be run.
 jobs:
-    # We have one job named "test-and-deploy".
     test-and-deploy:
-        # It will run on the latest version of Ubuntu.
         runs-on: ubuntu-latest
 
-        # ADDED: This section is required for the deploy-pages action to work.
         permissions:
-            pages: write # to deploy to Pages
-            id-token: write # to verify the deployment originates from an authentic source
+            pages: write 
+            id-token: write 
 
-        # These are the individual steps the job will execute.
         steps:
-            # 1. Checks out your repository code so the workflow can access it.
+            # 1. Bumped from v4 to v5 (Node 24 compatibility)
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
 
-            # 2. Sets up the Node.js environment required for your project.
+            # 2. Bumped from v4 to v5 (Node 24 compatibility)
             - name: Set up Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v5
               with:
-                  node-version: 18 # Use the same Node.js version you use locally.
+                  node-version: 18 
 
-            # 3. Installs the project dependencies from your package.json file.
             - name: Install dependencies
               run: npm install
 
-            # 4. Installs the necessary Playwright browsers.
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps
 
-            # 5. Runs the Playwright tests.
-            # The 'continue-on-error' line is important: it ensures that even if a test fails,
-            # the workflow will continue to the next step and publish the report.
             - name: Run Playwright tests
               run: npx playwright test
               continue-on-error: true
 
-              # 6. Install Allure Commandline Tool.
             - name: Install Allure Commandline
               run: npm install -g allure-commandline
 
-            # 7. Generate the Allure HTML report.
-            # This command takes the results from 'allure-results' and generates the report
-            # in the 'allure-report' directory, cleaning any previous report.
             - name: Generate Allure Report
               run: allure generate allure-results --clean -o allure-report
 
-            # 8. Gathers the generated report files.
+            # 8. Bumped from v3 to v4
             - name: Upload test report artifact
-              uses: actions/upload-pages-artifact@v3
+              uses: actions/upload-pages-artifact@v4
               with:
-                  # This is the folder where Allure generates its HTML report.
                   path: allure-report/
-                  # The report will be available for 30 days as an artifact.
                   retention-days: 30
 
-            # 9. Deploys the gathered report files to GitHub Pages.
+            # 9. Bumped from v4 to v5
             - name: Deploy to GitHub Pages
               id: deployment
-              uses: actions/deploy-pages@v4
+              uses: actions/deploy-pages@v5
